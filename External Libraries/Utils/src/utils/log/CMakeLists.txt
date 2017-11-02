@@ -1,0 +1,14 @@
+set(INCROOT ${INCROOT}/log)
+set(SRCROOT ${SRCROOT}/log)
+
+list(APPEND FILES_SRC
+    ${SRCROOT}/log.cpp
+)
+set(FILES_SRC "${FILES_SRC}" PARENT_SCOPE)
+
+list(APPEND FILES_HEADER
+    ${INCROOT}/log.hpp
+    ${INCROOT}/log.tpl
+)
+set(FILES_HEADER "${FILES_HEADER}" PARENT_SCOPE)
+
