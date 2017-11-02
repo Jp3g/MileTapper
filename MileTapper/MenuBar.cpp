@@ -9,7 +9,7 @@ namespace MileTapper {
 		Container::getLayout()->setSpace(0);
 
 		ActionTarget::bind(Action(sf::Event::Resized), [this](const sf::Event& event) {
-
+			// :3
 			if (Layout* layout = getLayout())
 				layout->invalidate();
 		});
