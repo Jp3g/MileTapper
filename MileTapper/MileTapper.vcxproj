@@ -150,7 +150,7 @@
     <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="Editor.cpp" />
-    <ClCompile Include="Fame.cpp" />
+    <ClCompile Include="Frame.cpp" />
     <ClCompile Include="HexaIso.cpp" />
     <ClCompile Include="HLayout.cpp" />
     <ClCompile Include="Label.cpp" />

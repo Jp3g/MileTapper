@@ -2,9 +2,9 @@
 
 namespace MileTapper {
 	Container::Container(Widget* parent) : Widget(parent), _layout(nullptr) {
-		_shape.setOutlineColor(sf::Color::Black);
+		_shape.setOutlineColor(sf::Color(200, 200, 200));
 		_shape.setFillColor(sf::Color(200, 200, 200));
-		_shape.setOutlineThickness(1);
+		_shape.setOutlineThickness(0);
 	}
 
 	Container::~Container() {

@@ -4,14 +4,21 @@
 #include "Button.hpp"
 
 namespace MileTapper {
-	MenuBar::MenuBar(sf::RenderWindow& window) : Container(nullptr), ActionTarget(Configuration::gui_inputs), _window(window), _size(_window.getSize().x , 50) {
+	MenuBar::MenuBar(sf::RenderWindow& window) : Container(nullptr), ActionTarget(Configuration::gui_inputs), _window(window), _size(_window.getSize().x , 50), _view(_window.getDefaultView()) {
 		Container::setLayout(new HLayout);
 		Container::getLayout()->setSpace(0);
 
 		ActionTarget::bind(Action(sf::Event::Resized), [this](const sf::Event& event) {
-			// :3
+
+			sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+			this->_view = sf::View(visibleArea);
+
+			_size.x = event.size.width;
+			_size.y = event.size.height;
+
+
 			if (Layout* layout = getLayout())
-				layout->invalidate();
+				layout->updateShape();
 		});
 	}
 
@@ -71,5 +78,18 @@ namespace MileTapper {
 			res = Container::processEvent(event, parent_pos);
 
 		return res;
+	}
+
+	void MenuBar::draw(sf::RenderTarget& target, sf::RenderStates states) const
+	{
+		//if (_isVisible)
+		//{
+			sf::View view = target.getView();
+			target.setView(_view);
+
+			Container::draw(target, states);
+
+			target.setView(view);
+		//}
 	}
 }

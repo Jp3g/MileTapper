@@ -20,8 +20,13 @@ namespace MileTapper {
 
 	}
 
-	MapViewer::MapViewer(sf::RenderWindow& window, const VMap& map, const ActionMap<int>& action_map) : ActionTarget(action_map), _map(map), _zoom(1), _moveX(0), _moveY(0), _movementSpeed(5), _window(window)
+	MapViewer::MapViewer(sf::RenderWindow& window, const VMap& map, const ActionMap<int>& action_map) : ActionTarget(action_map), _map(map), _zoom(1), _moveX(0), _moveY(0), _movementSpeed(6), _window(window)
 	{
+
+		ActionTarget::bind(Action(sf::Event::Resized), [this](const sf::Event& event) {
+			sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+			this->_view = sf::View(visibleArea);
+		});
 
 		bind(Configuration::MapInputs::MouseLeftReleased, [this](const sf::Event& event) {
 			drag(false);
@@ -31,8 +36,8 @@ namespace MileTapper {
 
 			if (!isDragging()) {
 
-				_mouseX = sf::Mouse::getPosition().x;
-				_mouseY = sf::Mouse::getPosition().y;
+				_mouseX = this->_view.getCenter().x + sf::Mouse::getPosition().x;
+				_mouseY = this->_view.getCenter().y + sf::Mouse::getPosition().y;
 			
 				drag(true);
 
@@ -41,19 +46,18 @@ namespace MileTapper {
 		});
 
 		bind(Configuration::MapInputs::MouseWheel, [this](const sf::Event& event) {
-			zoom(1 - (event.mouseWheelScroll.delta / 5.0));
+			//zoom(1 - (event.mouseWheelScroll.delta / 5.0));
 		});
 
 		bind(Configuration::MapInputs::ZoomIn, [this](const sf::Event& event) {
-			zoom(1 - (1 / 5.0));
+			//zoom(1 - (1 / 5.0)); 
 		});
 
 		bind(Configuration::MapInputs::ZoomOut, [this](const sf::Event& event) {
-			zoom(1 - (-1 / 5.0));
+			//zoom(1 - (-1 / 5.0)); 
 		});
 
 		bind(Configuration::MapInputs::MoveUp, [this](const sf::Event& event) {
-
 			_moveY = clamp(_moveY - 1, -1, 1);
 		});
 
@@ -134,20 +138,20 @@ namespace MileTapper {
 
 		if (isDragging()) {
 
-			float deltaMouseX = (sf::Mouse::getPosition().x - _mouseX) * _movementSpeed * seconds;
-			float deltaMouseY = (sf::Mouse::getPosition().y - _mouseY) * _movementSpeed * seconds;
+			float deltaMouseX = (_mouseX - sf::Mouse::getPosition().x);
+			float deltaMouseY = (_mouseY - sf::Mouse::getPosition().y);
 
-			move(deltaMouseX , deltaMouseY);
+			setPosition(deltaMouseX , deltaMouseY);
 		}
 
 
-		//if (_moveX || _moveY)
-		//{
-		//	float delta = _map._tileSize*_movementSpeed * seconds;
-		//	move(_moveX * delta * _movementSpeed, _moveY * delta * _movementSpeed);
-		//}
-		//_moveX = 0;
-		//_moveY = 0;
+		if (_moveX || _moveY)
+		{
+			float delta = _map._tileSize*_movementSpeed * seconds;
+			move(_moveX * delta * _movementSpeed, _moveY * delta * _movementSpeed);
+		}
+		_moveX = 0;
+		_moveY = 0;
 
 	}
 	void MapViewer::setSpeed(float speed)
@@ -209,6 +213,7 @@ namespace MileTapper {
 
 		_map.draw(target, states, sf::FloatRect(target.mapPixelToCoords(sf::Vector2i(0, 0), _view),
 			_view.getSize()));
+
 		target.setView(view);
 	}
 }

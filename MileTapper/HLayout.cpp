@@ -103,7 +103,7 @@ namespace MileTapper {
 
 		states.transform.translate(_position);
 
-		target.draw(_shape, states);
+		//target.draw(_shape, states);
 
 		for (Widget* widget : _widgets)
 			target.draw(*widget, states);

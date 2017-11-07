@@ -27,10 +27,13 @@ namespace MileTapper {
 
 	private:
 		sf::RenderWindow& _window;
+		sf::View _view;
 		sf::Vector2f _size;
 
 		virtual bool processEvent(const sf::Event& event, const sf::Vector2f& parent_pos) override;
 		virtual void processEvents(const sf::Vector2f& parent_pos);
+
+		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 	};
 }

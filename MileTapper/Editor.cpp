@@ -52,8 +52,8 @@ namespace MileTapper {
 		//_menu.setLayout(layout);
 
 		_menuBar.addButton(button);
-		//_menuBar.addButton(button2);
-		//_menuBar.addButton(button3);
+		_menuBar.addButton(button2);
+		_menuBar.addButton(button3);
 		
 	}
 
