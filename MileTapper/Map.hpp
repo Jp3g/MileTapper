@@ -81,7 +81,7 @@ namespace MileTapper {
 				}
 				add(current_layer, false);
 			}
-			else if (content == "sprite")
+			else if (content == "sprites")
 			{
 				auto current_layer = new Layer<sf::Sprite>(content, z, isStatic);
 

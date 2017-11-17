@@ -147,9 +147,12 @@
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Component.cpp" />
     <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="Editor.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="EntityES.cpp" />
     <ClCompile Include="Frame.cpp" />
     <ClCompile Include="HexaIso.cpp" />
     <ClCompile Include="HLayout.cpp" />
@@ -157,6 +160,7 @@
     <ClCompile Include="Layout.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapViewer.cpp" />
+    <ClCompile Include="memory.cpp" />
     <ClCompile Include="MenuBar.cpp" />
     <ClCompile Include="SquareIso.cpp" />
     <ClCompile Include="TextButton.cpp" />
@@ -170,9 +174,14 @@
     <ClInclude Include="ActionMap.hpp" />
     <ClInclude Include="ActionTarget.hpp" />
     <ClInclude Include="Button.hpp" />
+    <ClInclude Include="Component.hpp" />
+    <ClInclude Include="ComponentES.hpp" />
     <ClInclude Include="Configuration.hpp" />
     <ClInclude Include="Container.hpp" />
     <ClInclude Include="Editor.hpp" />
+    <ClInclude Include="Entity.hpp" />
+    <ClInclude Include="EntityES.hpp" />
+    <ClInclude Include="EntityManagerES.hpp" />
     <ClInclude Include="Frame.hpp" />
     <ClInclude Include="HexaIso.hpp" />
     <ClInclude Include="HLayout.hpp" />
@@ -181,6 +190,7 @@
     <ClInclude Include="Layout.hpp" />
     <ClInclude Include="Map.hpp" />
     <ClInclude Include="MapViewer.hpp" />
+    <ClInclude Include="memory.hpp" />
     <ClInclude Include="MenuBar.hpp" />
     <ClInclude Include="ResourceManager.hpp" />
     <ClInclude Include="SquareIso.hpp" />
