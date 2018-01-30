@@ -25,24 +25,6 @@
     <Filter Include="Source Files\Map">
       <UniqueIdentifier>{02f2eb3c-61d4-4b7c-9a4a-c75324a7e3c4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\ES">
-      <UniqueIdentifier>{ab16450d-dc60-42e5-aa92-c4323c26f3f0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\ES">
-      <UniqueIdentifier>{3f6e80eb-a19f-40ce-a1d0-f0706cea1c38}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\EntitySystem">
-      <UniqueIdentifier>{709ee7e5-5460-4239-b512-457de424b007}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\EntitySystem">
-      <UniqueIdentifier>{5896922e-5904-45b3-ad0a-8d93d760966e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Utils">
-      <UniqueIdentifier>{f27dee54-ae25-4afd-b261-72d90bec08ee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Utils">
-      <UniqueIdentifier>{0d21c146-481c-479a-83f8-eec5d5f4860d}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -52,9 +34,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Configuration.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Editor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Widget.cpp">
@@ -96,23 +75,17 @@
     <ClCompile Include="SquareIso.cpp">
       <Filter>Source Files\Map</Filter>
     </ClCompile>
-    <ClCompile Include="HexaIso.cpp">
-      <Filter>Source Files\Map</Filter>
-    </ClCompile>
     <ClCompile Include="Frame.cpp">
       <Filter>Source Files\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="Component.cpp">
-      <Filter>Source Files\EntitySystem</Filter>
+    <ClCompile Include="Cursor.cpp">
+      <Filter>Source Files\Map</Filter>
     </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Source Files\EntitySystem</Filter>
+    <ClCompile Include="Editor.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EntityES.cpp">
-      <Filter>Source Files\ES</Filter>
-    </ClCompile>
-    <ClCompile Include="memory.cpp">
-      <Filter>Source Files\Utils</Filter>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -129,9 +102,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Configuration.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Editor.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Widget.hpp">
@@ -164,9 +134,6 @@
     <ClInclude Include="MenuBar.hpp">
       <Filter>Header Files\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="HexaIso.hpp">
-      <Filter>Header Files\Map</Filter>
-    </ClInclude>
     <ClInclude Include="Layer.hpp">
       <Filter>Header Files\Map</Filter>
     </ClInclude>
@@ -188,23 +155,14 @@
     <ClInclude Include="SquareIso.hpp">
       <Filter>Header Files\Map</Filter>
     </ClInclude>
-    <ClInclude Include="ComponentES.hpp">
-      <Filter>Header Files\ES</Filter>
+    <ClInclude Include="Cursor.hpp">
+      <Filter>Header Files\Map</Filter>
     </ClInclude>
-    <ClInclude Include="Component.hpp">
-      <Filter>Header Files\EntitySystem</Filter>
+    <ClInclude Include="Editor.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Entity.hpp">
-      <Filter>Header Files\EntitySystem</Filter>
-    </ClInclude>
-    <ClInclude Include="EntityES.hpp">
-      <Filter>Header Files\ES</Filter>
-    </ClInclude>
-    <ClInclude Include="EntityManagerES.hpp">
-      <Filter>Header Files\ES</Filter>
-    </ClInclude>
-    <ClInclude Include="memory.hpp">
-      <Filter>Header Files\Utils</Filter>
+    <ClInclude Include="Game.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

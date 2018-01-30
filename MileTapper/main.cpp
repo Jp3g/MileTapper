@@ -1,12 +1,14 @@
-﻿#include "Editor.hpp"
+﻿#include "Game.hpp"
 #include <iostream>
 //#include <SFGUI/SFGUI.hpp>
 //#include <SFGUI/Widgets.hpp>
 
 int main(int argc, char* argv[]) {
 
-	MileTapper::Editor editor(1600, 900);
-	editor.run();
+	/*MileTapper::Editor editor(1600, 900);*/
+	MileTapper::Game mileTapper(1600, 900);
+	mileTapper.load();
+	mileTapper.run();
 
 	//// Create SFML's window.
 	//sf::RenderWindow render_window(sf::VideoMode(800, 600), "Hello world!");

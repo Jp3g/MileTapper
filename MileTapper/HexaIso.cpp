@@ -4,6 +4,7 @@
 namespace MileTapper{
 
 		sf::ConvexShape HexaIso::_shape;
+		sf::ConvexShape HexaIso::_box;
 		HexaIso::__Initiatiser HexaIso::__initiatiser__;
 
 		const float PI = 3.14159265;
@@ -15,6 +16,10 @@ namespace MileTapper{
 		const float height = sin_15 + sin_45 + sin_75;
 		const float delta_x = sin_45 - sin_15;
 		const float delta_y = sin_75 + sin_45;
+
+		const sf::ConvexShape& HexaIso::getBox() {
+			return _box;
+		}
 
 		const sf::ConvexShape& HexaIso::getShape()
 		{

@@ -3,6 +3,7 @@
 #include <SFML\Graphics.hpp>
 #include <string>
 #include <list>
+#include <iostream>
 #include "VLayer.hpp"
 
 namespace MileTapper {
@@ -46,7 +47,6 @@ namespace MileTapper {
 
 	private:
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states, const sf::FloatRect& viewport) override;
-
 		std::list<CONTENT*> _content;
 
 	};
@@ -124,6 +124,17 @@ namespace MileTapper {
 			return (pos_a.y < pos_b.y) || (pos_a.y == pos_b.y && pos_a.x < pos_b.x);
 		});
 	}
+
+	//template<typename CONTENT>
+	//void Layer<CONTENT>::processEvent(const sf::Event& event) {
+	//	auto end = _content.end();
+
+	//	for (auto it = _content.begin(); it != end; ++it) {
+	//		 CONTENT& content = *it;
+	//			content.processEvent(event);
+	//	}
+	//}
+
 
 	template<typename CONTENT>
 	void Layer<CONTENT>::draw(sf::RenderTarget& target, sf::RenderStates states, const sf::FloatRect& viewport) {
@@ -228,9 +239,11 @@ namespace MileTapper {
 		});
 	}
 
+
 	template<typename CONTENT>
 	void Layer<CONTENT*>::draw(sf::RenderTarget& target, sf::RenderStates states, const sf::FloatRect& viewport)
 	{
+
 		if (_isStatic)
 		{
 			if (_lastViewport != viewport)

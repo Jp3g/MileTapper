@@ -2,6 +2,9 @@
 
 #include <SFML\Graphics.hpp>
 #include "ActionTarget.hpp"
+#include "VMap.hpp"
+#include "Cursor.hpp"
+
 
 namespace MileTapper {
 
@@ -11,12 +14,11 @@ namespace MileTapper {
 		MapViewer(const MapViewer&) = delete;
 		MapViewer& operator=(const MapViewer&) = delete;
 
-		MapViewer(sf::RenderWindow& window, const VMap& map);
-		MapViewer(sf::RenderWindow& window, const VMap& map, const ActionMap<int>& action_map);
+		MapViewer(sf::RenderWindow& window, VMap& map);
+		MapViewer(sf::RenderWindow& window, VMap& map, const ActionMap<int>& action_map);
 
 		using ActionTarget::bind;
 		using ActionTarget::unbind;
-		using ActionTarget::processEvent;
 		using ActionTarget::processEvents;
 
 		void move(float offsetX, float offsetY);
@@ -53,11 +55,18 @@ namespace MileTapper {
 		sf::Vector2f mapCoordsToPixel(int x, int y) const;
 		sf::Vector2f mapCoordsToPixel(const sf::Vector2i& pos) const;
 
+		VMap& getVMap();
+		Cursor& getCursor();
+
 		float _mouseX;
 		float _mouseY;
 
+	protected:
+
 	private:
-		const VMap& _map;
+		friend class Editor;
+
+		VMap& _map;
 		sf::View _view;
 		float _zoom;
 		bool _isDragging = false;
@@ -65,7 +74,9 @@ namespace MileTapper {
 		int _moveX, _moveY;
 		float _movementSpeed;
 		sf::RenderWindow& _window;
+		Cursor _cursor;
 
+		virtual bool processEvent(const sf::Event& event);
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 	};
 

@@ -1,3 +1,4 @@
+#include <SFML\Graphics.hpp>
 #include "ComponentES.hpp"
 
 
@@ -7,7 +8,7 @@ namespace MileTapper
 	class Level;
 
 	//add some gold periodicly
-	struct CompAIMain : ComponentES<CompAIMain, Entity>
+	struct CompAIMain : <CompAIMain, Entity>
 	{
 		explicit CompAIMain(int gold, const sf::Time& timeDelta);
 

@@ -1,6 +1,6 @@
 #include "Component.hpp"
 
-namespace book
+namespace MileTapper
 {
 	CompAIMain::CompAIMain(int gold, const sf::Time& timeDelta) :_gold_amount(gold), _delta(timeDelta), _elapsed(sf::Time::Zero)
 	{

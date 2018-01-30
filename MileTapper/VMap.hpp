@@ -60,6 +60,7 @@ namespace MileTapper {
 	private:
 		friend class MapViewer;
 
+		//virtual void processEvent(const sf::Event& event);
 		void draw(sf::RenderTarget& target, sf::RenderStates states, const sf::FloatRect& viewport) const;
 		std::vector<VLayer*> _layers;
 	};

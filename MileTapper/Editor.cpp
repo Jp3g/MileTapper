@@ -5,15 +5,50 @@
 
 namespace MileTapper {
 
-	Editor::Editor(int X, int Y) : _window(sf::VideoMode(X, Y), "MileTapper"), _viewer(_window, *_map),
-		_menu(_window, sf::Vector2f(200,500)), _menuBar(_window){
+	Editor::Editor(sf::RenderWindow& window) :
+		_map(MileTapper::VMap::createMapFromFile("media/map.json")),
+		_viewer(window, *_map /*Configuration::mapInputs*/), 
+		_menuBar(window){
 		_viewer.setPosition(0, 0);
 		initGui();
 	}
 
 	Editor::~Editor(){
-
+		delete _map;
 	}
+
+	void Editor::update(sf::Time deltaTime) {
+		_viewer.update(deltaTime);
+
+		//sf::Listener::setPosition(pos.x, pos.x, _viewer.getZoom());	<-- ?
+	}
+
+	void Editor::processEvents() {
+		_viewer.processEvents();
+		_menuBar.processEvents();
+	}
+
+	bool Editor::processEvent(sf::Event& event) {
+		bool res = _viewer.processEvent(event);
+
+		if(!res)
+			res =_menuBar.processEvent(event);
+		/*
+			if (event.type == sf::Event::MouseMoved)
+			{
+				sf::Vector2i coord = _viewer.mapScreenToCoords(event.mouseMove.x, event.mouseMove.y);
+				sf::Vector2f pos = _viewer.mapCoordsToPixel(coord.x, coord.y);
+				_mouse_light->setPosition(pos);
+			}
+		*/
+		return res;
+	}
+
+	void Editor::draw(sf::RenderWindow& window) { //Les objet peuvent prendre leur propre _window
+		_viewer.draw();
+		_menuBar.draw();
+	}
+
 
 	void Editor::initGui() {
 
@@ -56,69 +91,4 @@ namespace MileTapper {
 		_menuBar.addButton(button3);
 		
 	}
-
-	void Editor::run(int frame_per_second) {
-		sf::Clock clock;
-		sf::Time timeSinceLastUpdate;
-		sf::Time TimePerFrame = sf::seconds(1.f / frame_per_second);
-
-		//_window.resetGLStates();
-
-		while (_window.isOpen()) {
-
-			bool repaint = false;
-
-			sf::Time delta = clock.restart();
-			timeSinceLastUpdate += delta;
-
-			if (timeSinceLastUpdate > TimePerFrame) {
-				processEvents();
-				timeSinceLastUpdate -= TimePerFrame;
-				repaint = true;
-
-				update(TimePerFrame);
-			}
-
-			if (repaint)
-				render();
-
-		}
-	}
-
-	void Editor::processEvents() {
-		sf::Event event;
-
-		while (_window.pollEvent(event)) {
-
-			if (event.type == sf::Event::Closed) {
-				_window.close();
-			}
-
-			_viewer.processEvent(event);
-			//_menu.processEvent(event);
-			_menuBar.processEvent(event);
-		}
-
-		_viewer.processEvents();
-		//_menu.processEvents();
-		_menuBar.processEvents();
-	}
-
-	void Editor::update(sf::Time deltaTime) {
-
-		_viewer.update(deltaTime);
-
-	}
-
-	void Editor::render() {
-
-		_window.clear();
-
-		_viewer.draw();
-		//_menu.draw();
-		_menuBar.draw();
-
-		_window.display();
-	}
-
 }

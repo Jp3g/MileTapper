@@ -2,12 +2,16 @@
 #include <cmath>
 
 namespace MileTapper {
-
+			sf::ConvexShape SquareIso::_box;
 			sf::ConvexShape SquareIso::_shape;
 			SquareIso::__Initiatiser SquareIso::__initiatiser__;
 
 			const float height = 1;
 			const float width = 2;
+
+			const sf::ConvexShape& SquareIso::getBox() {
+				return _box;
+			}
 
 			const sf::ConvexShape& SquareIso::getShape() {
 				return _shape;
@@ -43,6 +47,7 @@ namespace MileTapper {
 			}
 
 			void SquareIso::init() {
+
 				_shape.setPointCount(4);
 				_shape.setPoint(0, sf::Vector2f(width / 2, 0));
 				_shape.setPoint(1, sf::Vector2f(width, height / 2));
@@ -50,5 +55,18 @@ namespace MileTapper {
 				_shape.setPoint(3, sf::Vector2f(0, height / 2));
 
 				_shape.setOrigin(width / 2, height / 2);
+
+				_box.setPointCount(4);
+				_box.setPoint(0, sf::Vector2f(width, 0));
+				_box.setPoint(1, sf::Vector2f(width, height));
+				_box.setPoint(2, sf::Vector2f(0, height));
+				_box.setPoint(3, sf::Vector2f(0, 0));
+
+				_box.setOrigin(width / 2, height / 2);
+				_box.setOutlineColor(sf::Color::Cyan);
+
+				_box.setFillColor(sf::Color(0, 0, 0, 0));
+
+
 			}
 }

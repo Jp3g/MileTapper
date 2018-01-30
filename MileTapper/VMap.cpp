@@ -3,7 +3,8 @@
 
 #include <iostream>
 #include "SquareIso.hpp"
-#include "HexaIso.hpp"
+//#include "HexaIso.hpp" - Excluded from project
+//#include "Square.hpp" - Excluded from project
 #include <algorithm>
 
 namespace MileTapper {
@@ -105,6 +106,14 @@ namespace MileTapper {
 			_layers[i]->sort();
 	}
 
+	//void VMap::processEvent(const sf::Event& event ) {
+	//	const size_t size = _layers.size();
+
+	//	for (size_t i = 0; i < size; ++i)
+	//		_layers[i]->processEvent(event); // Process only visible tile ?
+
+	//}
+
 	void VMap::draw(sf::RenderTarget& target, sf::RenderStates states, const sf::FloatRect& viewport) const{
 		sf::FloatRect delta_viewport(viewport.left - _tileSize,
 			viewport.top - _tileSize,
@@ -115,7 +124,9 @@ namespace MileTapper {
 
 		for (size_t i = 0; i < size; ++i)
 			_layers[i]->draw(target, states, delta_viewport);
+
 	}
+
 
 	VMap* VMap::createMapFromFile(const char* filename) {
 		VMap* res = nullptr;
@@ -164,17 +175,18 @@ namespace MileTapper {
 		//	res = new Map<geometry::Hexa>(size);
 		//	res->loadFromJson(root);
 		//}
-		if (geometry_name == "HexaIso")
-		{
-			res = new Map<MileTapper::HexaIso>(size);
-			res->loadFromJson(root);
+		//if (geometry_name == "HexaIso")
+		//{
+		//	res = new Map<MileTapper::HexaIso>(size);
+		//	res->loadFromJson(root);
+		//}
 		//else if (geometry_name == "Square")
 		//{
-		//	res = new Map<geometry::Square>(size);
+		//	res = new Map<MileTapper::Square>(size);
 		//	res->loadFromJson(root);
 		//}
 
-		}else if (geometry_name == "SquareIso") {
+		/*else*/ if (geometry_name == "SquareIso") {
 			res = new Map<MileTapper::SquareIso>(size);
 			res->loadFromJson(root);
 		}else{

@@ -58,63 +58,97 @@ namespace MileTapper {
 			{
 				auto current_layer = new Layer<Tile<GEOMETRY>>(content, z, isStatic);
 
-				for (auto& texture : layer["datas"].GetArray())
-				{
+				//for (auto& texture : layer["datas"].GetArray())
+				//{
 
-					int tex_x = texture["x"].GetInt();
-					int tex_y = texture["y"].GetInt();
-					int height = std::max<int>(0, texture["height"].GetInt());
-					int width = std::max<int>(0, texture["width"].GetInt());
-					std::string img = texture["img"].GetString();
-					sf::Texture& tex = _textures.getOrLoad(img, img);
-					tex.setRepeated(true);
-					for (int y = tex_y; y< tex_y + height; ++y)
-					{
-						for (int x = tex_x; x<tex_x + width; ++x)
-						{
-							Tile<GEOMETRY> tile(x, y, _tileSize);
-							tile.setTexture(&tex);
-							tile.setTextureRect(GEOMETRY::getTextureRect(x, y, _tileSize));
-							current_layer->add(std::move(tile), false);
-						}
+				//	int tex_x = texture["x"].GetInt();
+				//	int tex_y = texture["y"].GetInt();
+				//	int height = std::max<int>(0, texture["height"].GetInt());
+				//	int width = std::max<int>(0, texture["width"].GetInt());
+				//	std::string img = texture["img"].GetString();
+				//	sf::Texture& tex = _textures.getOrLoad(img, img);
+				//	tex.setRepeated(false);
+				//	for (int y = tex_y; y< tex_y + height; ++y)
+				//	{
+				//		for (int x = tex_x; x<tex_x + width; ++x)
+				//		{
+				//			Tile<GEOMETRY> tile(x, y, _tileSize);
+				//			tile.setTexture(&tex);
+				//			tile.setTextureRect(GEOMETRY::getTextureRect(x, y, _tileSize));
+				//			current_layer->add(std::move(tile), false);
+				//		}
+				//	}
+				//}
+
+				std::string img = "media/img/nullT.png";
+				sf::Texture& tex = _textures.getOrLoad(img, img);
+				tex.setRepeated(false);
+
+				for (int y = 0; y <10; ++y) {
+					for (int x = 0; x <10; ++x) {
+						Tile<GEOMETRY> tile(x, y, _tileSize);
+						tile.setTexture(&tex);
+						tile.setTextureRect(GEOMETRY::getTextureRect(0, 0, _tileSize));
+						current_layer->add(std::move(tile), false);
 					}
 				}
+
+				//Tile<GEOMETRY> tile(0, 0, _tileSize);
+				//tile.setTexture(&tex);
+				//tile.setTextureRect(GEOMETRY::getTextureRect(0, 0, _tileSize));
+				//current_layer->add(std::move(tile), false);
+
+				//Tile<GEOMETRY> tile2(1, 0, _tileSize);
+				//tile2.setTexture(&tex);
+				//tile2.setTextureRect(GEOMETRY::getTextureRect(0, 0, _tileSize));
+				//current_layer->add(std::move(tile2), false);
+
+				//Tile<GEOMETRY> tile3(0, 1, _tileSize);
+				//tile3.setTexture(&tex);
+				//tile3.setTextureRect(GEOMETRY::getTextureRect(0, 0, _tileSize));
+				//current_layer->add(std::move(tile3), false);
+
+				//Tile<GEOMETRY> tile4(1,1, _tileSize);
+				//tile4.setTexture(&tex);
+				//tile4.setTextureRect(GEOMETRY::getTextureRect(0, 0, _tileSize));
+				//current_layer->add(std::move(tile4), false);
+
 				add(current_layer, false);
 			}
-			else if (content == "sprites")
-			{
-				auto current_layer = new Layer<sf::Sprite>(content, z, isStatic);
+			//else if (content == "sprites")
+			//{
+			//	auto current_layer = new Layer<sf::Sprite>(content, z, isStatic);
 
-				for (auto& data : layer["datas"].GetArray())
-				{
+			//	for (auto& data : layer["datas"].GetArray())
+			//	{
 
-					int x = data["x"].GetInt();
-					int y = data["y"].GetInt();
-					float ox = 0.5;
-					float oy = 1;
-					try {
-						//ox = data["ox"].GetFloat();
-					}
-					catch (...) {}
+			//		int x = data["x"].GetInt();
+			//		int y = data["y"].GetInt();
+			//		float ox = 0.5;
+			//		float oy = 1;
+			//		try {
+			//			//ox = data["ox"].GetFloat();
+			//		}
+			//		catch (...) {}
 
-					try {
-						//oy = data["oy"].GetFloat();
-					}
-					catch (...) {}
+			//		try {
+			//			//oy = data["oy"].GetFloat();
+			//		}
+			//		catch (...) {}
 
-					std::string img = data["img"].GetString();
+			//		std::string img = data["img"].GetString();
 
-					sf::Sprite spr(_textures.getOrLoad(img, img));
-					spr.setPosition(GEOMETRY::mapCoordsToPixel(x, y, _tileSize));
+			//		sf::Sprite spr(_textures.getOrLoad(img, img));
+			//		spr.setPosition(GEOMETRY::mapCoordsToPixel(x, y, _tileSize));
 
-					sf::FloatRect rec = spr.getLocalBounds();
-					spr.setOrigin(rec.width*ox, rec.height*oy);
+			//		sf::FloatRect rec = spr.getLocalBounds();
+			//		spr.setOrigin(rec.width*ox, rec.height*oy);
 
-					current_layer->add(std::move(spr), false);
+			//		//current_layer->add(std::move(spr), false);
 
-				}
-				add(current_layer, false);
-			}
+			//	}
+			//	add(current_layer, false);
+			//}
 		}
 		sortLayers();
 	}

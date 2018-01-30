@@ -1,12 +1,7 @@
 #pragma once 
+
 #include <SFML\Graphics.hpp>
-
-#include "EntityES.hpp"
-#include "EntityManagerES.hpp"
-
 #include <functional>
-
-
 
 namespace MileTapper
 {

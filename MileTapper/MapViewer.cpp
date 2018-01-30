@@ -15,12 +15,19 @@ namespace MileTapper {
 		return value < min ? min : (value > max ? max : value);
 	}
 
-	MapViewer::MapViewer(sf::RenderWindow& window, const VMap& map) : MapViewer(window, map, Configuration::defaultMapInputs)
+	MapViewer::MapViewer(sf::RenderWindow& window, VMap& map) : MapViewer(window, map, Configuration::defaultMapInputs)
 	{
 
 	}
 
-	MapViewer::MapViewer(sf::RenderWindow& window, const VMap& map, const ActionMap<int>& action_map) : ActionTarget(action_map), _map(map), _zoom(1), _moveX(0), _moveY(0), _movementSpeed(6), _window(window)
+	MapViewer::MapViewer(sf::RenderWindow& window, VMap& map, const ActionMap<int>& action_map) :
+		ActionTarget(action_map),
+		_map(map), _zoom(1),
+		_moveX(0),
+		_moveY(0),
+		_movementSpeed(6),
+		_window(window),
+		_cursor(window, map.getShape())
 	{
 
 		ActionTarget::bind(Action(sf::Event::Resized), [this](const sf::Event& event) {
@@ -33,6 +40,7 @@ namespace MileTapper {
 		});
 
 		bind(Configuration::MapInputs::MouseLeftClick, [this](const sf::Event& event) {
+			
 
 			if (!isDragging()) {
 
@@ -153,6 +161,8 @@ namespace MileTapper {
 		_moveX = 0;
 		_moveY = 0;
 
+		_cursor.update(deltaTime);
+
 	}
 	void MapViewer::setSpeed(float speed)
 	{
@@ -206,6 +216,35 @@ namespace MileTapper {
 		return _map.mapCoordsToPixel(pos.x, pos.y);
 	}
 
+	VMap& MapViewer::getVMap() {
+		return _map;
+	}
+
+	Cursor& MapViewer::getCursor() {
+		return _cursor;
+	}
+
+	bool MapViewer::processEvent(const sf::Event& event) {
+		bool res = ActionTarget::processEvent(event);
+
+		if (event.type == sf::Event::MouseMoved)
+		{
+			sf::Vector2i coord = mapScreenToCoords(event.mouseMove.x, event.mouseMove.y);
+			sf::Vector2f pos = mapCoordsToPixel(coord.x, coord.y);
+			//std::cout << "Coord X:" << coord.x << " Y:" << coord.y << std::endl;
+			//std::cout << "Pos X:" << pos.x << " Y:" << pos.y << std::endl;
+
+			_cursor.setPosition(pos);
+			_cursor.setCoord(coord);
+		}
+
+		//if (!res)
+		//	_map.processEvent(event);
+			//res = Container::processEvent(event, parent_pos);
+
+		return res; // ??
+	}
+
 	void MapViewer::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
 		sf::View view = target.getView();
@@ -213,6 +252,7 @@ namespace MileTapper {
 
 		_map.draw(target, states, sf::FloatRect(target.mapPixelToCoords(sf::Vector2i(0, 0), _view),
 			_view.getSize()));
+		_cursor.draw(target, states);
 
 		target.setView(view);
 	}

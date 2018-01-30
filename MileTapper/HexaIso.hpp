@@ -1,12 +1,13 @@
 #pragma once 
 
-#include <SFML/Graphics.hpp>
+#include <SFML\Graphics.hpp>
 
 namespace MileTapper {
 
 	struct HexaIso
 	{
 	public:
+		static const sf::ConvexShape& getBox();
 		static const sf::ConvexShape& getShape();
 		static sf::Vector2f mapCoordsToPixel(int x, int y, float scale);
 		static sf::Vector2i mapPixelToCoords(float x, float y, float scale);
@@ -16,6 +17,7 @@ namespace MileTapper {
 
 
 	private:
+		static sf::ConvexShape _box;
 		static sf::ConvexShape _shape;
 		static void init();
 

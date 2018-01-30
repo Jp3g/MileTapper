@@ -4,7 +4,11 @@
 #include "Button.hpp"
 
 namespace MileTapper {
-	MenuBar::MenuBar(sf::RenderWindow& window) : Container(nullptr), ActionTarget(Configuration::gui_inputs), _window(window), _size(_window.getSize().x , 50), _view(_window.getDefaultView()) {
+	MenuBar::MenuBar(sf::RenderWindow& window) : Container(nullptr),
+		ActionTarget(Configuration::gui_inputs),
+		_window(window),
+		_size(_window.getSize().x, 50),
+		_view(_window.getDefaultView()) {
 		Container::setLayout(new HLayout);
 		Container::getLayout()->setSpace(0);
 

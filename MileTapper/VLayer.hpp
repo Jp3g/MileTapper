@@ -30,7 +30,7 @@ namespace MileTapper {
 	private:
 		friend class VMap;
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states, const sf::FloatRect& viewport) = 0;
-
+		//virtual void processEvent(const sf::Event& event) = 0;
 		const int _z;
 
 	};

@@ -24,6 +24,5 @@ namespace MileTapper {
 		enum Status { None = 0, Hover = 1 };
 		int _status;
 
-
 	};
 }
